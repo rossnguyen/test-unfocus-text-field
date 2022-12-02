@@ -1,7 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test_unfocus_text_field/dismiss_keyboard.dart';
 import 'package:test_unfocus_text_field/home.dart';
 void main() {
   runApp(MyApp());
@@ -15,14 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return DismissKeyboard(
-      child: MaterialApp(
-        title: 'Test unfocus',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage(),
+    return MaterialApp(
+      title: 'Test unfocus',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: HomePage(),
     );
   }
 }

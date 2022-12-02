@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class MyMoney extends StatefulWidget {
   const MyMoney({super.key, required this.hint});
-  // static bool justClicked = false;
+  static bool justClicked = false;
   final String hint;
 
   @override
@@ -31,12 +31,17 @@ class _MyMoneyState extends State<MyMoney> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      style: textStyle,
-      inputFormatters: <TextInputFormatter>[_formatter],
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(hintText: widget.hint),
+    return Listener(
+      onPointerDown: (event) {
+        MyMoney.justClicked = true;
+      },
+      child: TextFormField(
+        controller: controller,
+        style: textStyle,
+        inputFormatters: <TextInputFormatter>[_formatter],
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(hintText: widget.hint),
+      ),
     );
   }
 }

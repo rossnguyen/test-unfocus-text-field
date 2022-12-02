@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   late TextEditingController controller;
   final CurrencyTextInputFormatter _formatter =
       CurrencyTextInputFormatter(decimalDigits: 2, locale: 'ko', symbol: '');
+
   @override
   void initState() {
     super.initState();
@@ -36,36 +37,46 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Container(
-        padding: const EdgeInsets.all(32),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                'Cái này là Text nè',
-                style: textStyle,
-              ),
-              spacer,
-              MyButton(
-                  text: 'Button nè ^^',
-                  onTap: () {
-                    setState(() {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
-                        content: Text('Mới nhấp dô cái nút nè'),
-                        duration: Duration(seconds: 1),
-                      ));
-                    });
-                  }),
-              spacer,
-              MyMoney(hint: 'Money Field 1'),
-              spacer,
-              MyMoney(hint: 'Money Field 2'),
-              spacer,
-              MyTextField(hint: 'Another text field 1'),
-              spacer,
-              MyTextField(hint: 'Another text field 2'),
-            ],
+      child: Listener(
+        onPointerDown: (event) {
+          if (MyMoney.justClicked) {
+            //do nothing
+            MyMoney.justClicked = false;
+          } else {
+            FocusScope.of(context).unfocus();
+          }
+        },
+        behavior: HitTestBehavior.opaque,
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  'Cái này là Text nè',
+                  style: textStyle,
+                ),
+                spacer,
+                MyButton(
+                    text: 'Button nè ^^',
+                    onTap: () {
+                      setState(() {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Mới nhấp dô cái nút nè'),
+                          duration: Duration(seconds: 1),
+                        ));
+                      });
+                    }),
+                spacer,
+                MyMoney(hint: 'Money Field 1'),
+                spacer,
+                MyMoney(hint: 'Money Field 2'),
+                spacer,
+                MyTextField(hint: 'Another text field 1'),
+                spacer,
+                MyTextField(hint: 'Another text field 2'),
+              ],
+            ),
           ),
         ),
       ),
